@@ -22,7 +22,7 @@
     <div x-data="calendarApp({{ json_encode($calendarData) }})"
          :class="darkMode ? 'dark-theme-active text-white' : 'bg-[#F5F7FA] text-slate-800'"
          class="py-8 min-h-screen font-sans transition-colors duration-700 relative overflow-hidden">
-        
+
         <!-- ELEMENT ANGKASA (Hanya di Mode Gelap) -->
         <template x-if="darkMode">
             <div class="absolute inset-0 pointer-events-none">
@@ -36,12 +36,12 @@
         </template>
 
         <div class="relative z-10 max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            
+
             <!-- HEADER -->
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <h2 class="text-xl font-bold tracking-tight">Dashboard Peserta Pelatihan</h2>
-                
-                <button @click="toggleTheme()" 
+
+                <button @click="toggleTheme()"
                         class="p-2 rounded-2xl transition-all duration-500 shadow-lg flex items-center gap-3 font-bold text-[10px] uppercase tracking-widest"
                         :class="darkMode ? 'bg-white/10 text-yellow-400 border border-white/10' : 'bg-white text-indigo-600 border border-slate-200'">
                     <span x-show="!darkMode">🌙 Mode Angkasa</span>
@@ -71,7 +71,7 @@
                             <p class="text-sm opacity-50 mb-1 font-semibold">Periode Pelatihan</p>
                             <h3 class="text-lg font-bold">
                                 @if(Auth::user()->intern_start_date && Auth::user()->intern_end_date)
-                                    {{ \Carbon\Carbon::parse(Auth::user()->intern_start_date)->translatedFormat('d F Y') }} - 
+                                    {{ \Carbon\Carbon::parse(Auth::user()->intern_start_date)->translatedFormat('d F Y') }} -
                                     {{ \Carbon\Carbon::parse(Auth::user()->intern_end_date)->translatedFormat('d F Y') }}
                                 @else
                                     16 Desember 2025 - 16 Juni 2026
@@ -114,14 +114,14 @@
                     @if(Auth::user()->performance_target)
                         {!! nl2br(e(Auth::user()->performance_target)) !!}
                     @else
-                        <span class="opacity-40 italic font-normal text-xs tracking-wide tracking-tighter">Belum ada indikator kinerja yang ditetapkan oleh Mentor.</span>
+                        <span class="opacity-40 italic font-normal text-xs tracking-wide tracking-tighter">Belum ada indikator kinerja yang ditetapkan oleh Instruktur.</span>
                     @endif
                 </div>
             </div>
 
             <!-- AREA BAWAH -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
-                
+
                 <!-- KALENDER -->
                 <div :class="darkMode ? 'glass-dark border-white/20' : 'bg-white border border-gray-100 shadow-sm'" class="lg:col-span-2 rounded-xl p-5 select-none transition-all duration-500">
                     <div class="mb-5 border-b border-white/5 pb-4 flex items-center justify-between">
@@ -178,9 +178,9 @@
                         <div class="flex gap-3 pb-3 border-b border-white/5 last:border-0 last:pb-0">
                             <div class="flex-shrink-0 mt-1">
                                 <div class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shadow-sm
-                                    {{ $report->status == 'approved' ? 'bg-green-100 text-green-700' : 
-                                      ($report->status == 'revision' ? 'bg-yellow-100 text-yellow-700' : 
-                                      ($report->status == 'rejected' ? 'bg-red-100 text-red-700' : 
+                                    {{ $report->status == 'approved' ? 'bg-green-100 text-green-700' :
+                                      ($report->status == 'revision' ? 'bg-yellow-100 text-yellow-700' :
+                                      ($report->status == 'rejected' ? 'bg-red-100 text-red-700' :
                                       ($report->status == 'permit' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'))) }}">
                                     @if($report->status == 'approved') ✓ @elseif($report->status == 'revision') ✎ @else .. @endif
                                 </div>
@@ -203,14 +203,14 @@
         <div x-show="showModal" style="display: none;" class="fixed inset-0 z-[100] overflow-y-auto">
             <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm" @click="showModal = false"></div>
             <div class="flex min-h-screen items-center justify-center p-4">
-                <div x-show="showModal" @click.away="showModal = false" 
+                <div x-show="showModal" @click.away="showModal = false"
                      x-transition:enter="transition ease-out duration-300"
                      x-transition:enter-start="opacity-0 scale-95"
                      x-transition:enter-end="opacity-100 scale-100"
-                     class="relative w-full max-w-md rounded-[2.5rem] p-10 shadow-2xl transition-all duration-500 border"
+                     class="relative w-full max-w-md rounded-2xl p-6 shadow-2xl transition-all duration-500 border"
                      :class="darkMode ? 'bg-[#0f172a] border-white/20 text-white' : 'bg-white border-slate-100 text-slate-800'">
-                    
-                    <h3 class="text-2xl font-bold mb-8" x-text="mode === 'create' ? 'Input Laporan' : 'Detail Laporan'"></h3>
+
+                    <h3 class="text-xl font-bold mb-6" x-text="mode === 'create' ? 'Input Laporan' : 'Detail Laporan'"></h3>
 
                     <form :action="mode === 'edit' ? '/reports/content/' + currentReportId : '{{ route('reports.store') }}'" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -220,30 +220,30 @@
                         <!-- Input Tanggal -->
                         <div class="mb-6">
                             <label class="block text-sm font-semibold mb-2 ml-1 opacity-70">Tanggal</label>
-                            <input type="text" :value="selectedDateDisplay" readonly 
-                                   class="w-full rounded-2xl border-0 py-4 px-5 text-base font-bold text-indigo-500 shadow-inner cursor-not-allowed"
+                            <input type="text" :value="selectedDateDisplay" readonly
+                                   class="w-full rounded-2xl border-0 py-3 px-4 text-sm font-bold text-indigo-500 shadow-inner cursor-not-allowed"
                                    :class="darkMode ? 'bg-white/10' : 'bg-[#F1F3F6]'">
                         </div>
 
                         <!-- Status Kehadiran -->
                         <div class="mb-6" x-show="mode === 'create'">
                             <label class="block text-sm font-semibold mb-2 ml-1 opacity-70">Status Kehadiran</label>
-                            <div class="grid grid-cols-2 gap-4">
-                                <label class="cursor-pointer border-2 rounded-2xl p-4 flex items-center gap-4 transition-all" 
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer border-2 rounded-2xl p-3 flex items-center gap-3 transition-all"
                                        :class="attendanceType === 'present' ? 'border-indigo-500 bg-indigo-50/10' : (darkMode ? 'border-white/5 opacity-40' : 'border-slate-100')">
                                     <input type="radio" name="attendance_type" value="present" class="hidden" x-model="attendanceType">
-                                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors" :class="attendanceType === 'present' ? 'border-indigo-600' : 'border-slate-300'">
-                                        <div class="w-3 h-3 rounded-full bg-indigo-600" x-show="attendanceType === 'present'"></div>
+                                    <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors" :class="attendanceType === 'present' ? 'border-indigo-600' : 'border-slate-300'">
+                                        <div class="w-2 h-2 rounded-full bg-indigo-600" x-show="attendanceType === 'present'"></div>
                                     </div>
-                                    <span class="text-sm font-bold">Hadir</span>
+                                    <span class="text-xs font-semibold">Hadir</span>
                                 </label>
-                                <label class="cursor-pointer border-2 rounded-2xl p-4 flex items-center gap-4 transition-all" 
+                                <label class="cursor-pointer border-2 rounded-2xl p-3 flex items-center gap-3 transition-all"
                                        :class="attendanceType === 'permit' ? 'border-blue-500 bg-blue-50/10' : (darkMode ? 'border-white/5 opacity-40' : 'border-slate-100')">
                                     <input type="radio" name="attendance_type" value="permit" class="hidden" x-model="attendanceType">
-                                    <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors" :class="attendanceType === 'permit' ? 'border-blue-500' : 'border-slate-300'">
-                                        <div class="w-3 h-3 rounded-full bg-blue-500" x-show="attendanceType === 'permit'"></div>
+                                    <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors" :class="attendanceType === 'permit' ? 'border-blue-500' : 'border-slate-300'">
+                                        <div class="w-2 h-2 rounded-full bg-blue-500" x-show="attendanceType === 'permit'"></div>
                                     </div>
-                                    <span class="text-sm font-bold">Izin / Sakit</span>
+                                    <span class="text-xs font-semibold">Izin / Sakit</span>
                                 </label>
                             </div>
                         </div>
@@ -251,8 +251,9 @@
                         <!-- Detail Aktivitas -->
                         <div class="mb-8">
                             <label class="block text-sm font-semibold mb-2 ml-1 opacity-70" x-text="attendanceType === 'permit' ? 'Alasan Ketidakhadiran' : 'Detail Aktivitas'"></label>
-                            <textarea name="aktivitas" rows="5" required x-model="currentActivity" :disabled="mode === 'read'"
-                                      class="w-full rounded-[1.5rem] p-5 text-base font-medium border-2 focus:ring-4 transition-all duration-300"
+                            <textarea name="aktivitas" rows="4" required x-model="currentActivity" :disabled="mode === 'read'"
+                                      :placeholder="attendanceType === 'permit' ? 'Tuliskan alasan izin/sakit...' : 'Tuliskan aktivitas harian secara ringkas...'"
+                                      class="w-full rounded-xl p-4 text-sm font-medium border-2 focus:ring-4 transition-all duration-300"
                                       :class="darkMode ? 'bg-slate-800 border-white/5 text-white' : 'bg-white border-slate-100 text-slate-800'">
                             </textarea>
                         </div>
@@ -260,10 +261,32 @@
                         <!-- Upload Gambar -->
                         <div class="mb-6" x-show="mode === 'create' || mode === 'edit'">
                             <label class="block text-[10px] font-black uppercase tracking-widest opacity-50 mb-2 ml-1">Lampiran Foto (Opsional)</label>
-                            <label class="relative flex items-center justify-center w-full p-4 border-2 border-dashed rounded-2xl cursor-pointer hover:bg-slate-50 transition" :class="darkMode ? 'border-white/10 hover:bg-white/5' : 'border-slate-200'">
-                                <span class="text-xs font-bold opacity-50">Pilih Dokumen / Foto</span>
-                                <input type="file" name="gambar" class="absolute inset-0 opacity-0 cursor-pointer">
+                            <label class="relative flex items-center justify-center w-full p-3 border-2 border-dashed rounded-2xl cursor-pointer transition"
+                                   :class="imageSelected ? (darkMode ? 'border-green-400 bg-green-500/5' : 'border-green-400 bg-green-50') : (darkMode ? 'border-white/10 hover:bg-white/5' : 'border-slate-200 hover:bg-slate-50')">
+                                <span x-show="!imageSelected" class="text-xs font-bold opacity-50 flex items-center gap-2">
+                                    <svg class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M4 16l6-6 4 4 6-6"></path></svg>
+                                    Pilih Dokumen / Foto
+                                </span>
+                                <span x-show="imageSelected" class="text-xs font-bold text-green-600 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    File dipilih: <span x-text="selectedImageName"></span>
+                                </span>
+                                <input x-ref="imageInput" @change="handleImageUpload($event)" type="file" name="gambar" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer">
                             </label>
+                            <template x-if="imageSelected">
+                                <div class="mt-3 flex items-center justify-between gap-3 p-3 rounded-xl border"
+                                     :class="darkMode ? 'border-white/10 bg-white/5' : 'border-slate-200 bg-white'">
+                                    <div class="flex items-center gap-3">
+                                        <img :src="selectedImagePreview" alt="Preview" class="w-10 h-10 rounded-lg object-cover">
+                                        <div>
+                                            <p class="text-sm font-semibold" x-text="selectedImageName"></p>
+                                            <p class="text-[10px] font-black uppercase tracking-widest text-green-600">File terpilih</p>
+                                        </div>
+                                    </div>
+                                    <button type="button" @click="clearImage()" class="text-xs font-bold px-3 py-1 rounded-lg"
+                                            :class="darkMode ? 'bg-white/10 text-white' : 'bg-slate-100 text-slate-700'">Hapus</button>
+                                </div>
+                            </template>
                         </div>
 
                         <!-- Lihat Gambar -->
@@ -276,9 +299,9 @@
                         </template>
 
                         <!-- Tombol Footer -->
-                        <div class="flex justify-end gap-4">
-                            <button type="button" @click="showModal = false" class="px-8 py-3 rounded-2xl text-sm font-bold border-2 transition" :class="darkMode ? 'border-white/20 text-white hover:bg-white/10' : 'border-slate-200 text-slate-500'">Tutup</button>
-                            <button type="submit" x-show="mode !== 'read'" class="px-10 py-3 rounded-2xl bg-indigo-600 text-white text-sm font-bold shadow-xl shadow-indigo-500/50 hover:bg-indigo-700 transition transform active:scale-95">
+                        <div class="flex justify-end gap-3">
+                            <button type="button" @click="showModal = false" class="px-6 py-2.5 rounded-2xl text-sm font-bold border-2 transition" :class="darkMode ? 'border-white/20 text-white hover:bg-white/10' : 'border-slate-200 text-slate-500'">Tutup</button>
+                            <button type="submit" x-show="mode !== 'read'" class="px-8 py-2.5 rounded-2xl bg-indigo-600 text-white text-sm font-bold shadow-xl shadow-indigo-500/50 hover:bg-indigo-700 transition transform active:scale-95">
                                 <span x-text="mode === 'edit' ? 'Simpan Revisi' : 'Simpan Laporan'"></span>
                             </button>
                         </div>
@@ -297,6 +320,7 @@
                 no_of_days: [], blankDays: [], dayNames: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
                 monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
                 reports: serverReports, showModal: false, selectedDay: null, mode: 'create', currentActivity: '', currentFeedback: '', currentStatus: '', currentReportId: null, attendanceType: 'present', currentImage: null,
+                imageSelected: false, selectedImageName: null, selectedImagePreview: null,
 
                 init() { this.getNoOfDays(); },
                 toggleTheme() { this.darkMode = !this.darkMode; localStorage.setItem('theme', this.darkMode ? 'dark' : 'light'); },
@@ -322,8 +346,8 @@
                 },
                 isToday(day) { const d = new Date(this.year, this.month, day); return new Date().toDateString() === d.toDateString(); },
                 isFuture(day) { const today = new Date(); today.setHours(0,0,0,0); return new Date(this.year, this.month, day) > today; },
-                openModal(day) { 
-                    if (this.isFuture(day)) return; 
+                openModal(day) {
+                    if (this.isFuture(day)) return;
                     this.selectedDay = day;
                     let reportData = this.reports[this.formatDate(day)];
                     if (reportData) {
@@ -332,10 +356,27 @@
                     } else {
                         this.mode = 'create'; this.currentActivity = ''; this.attendanceType = 'present'; this.currentReportId = null; this.currentImage = null;
                     }
-                    this.showModal = true; 
+                    this.imageSelected = false; this.selectedImageName = null; this.selectedImagePreview = null;
+                    this.showModal = true;
                 },
                 get selectedDateFormatted() { return this.formatDate(this.selectedDay); },
-                get selectedDateDisplay() { if(!this.selectedDay) return ''; return this.selectedDay + ' ' + this.monthNames[this.month] + ' ' + this.year; }
+                get selectedDateDisplay() { if(!this.selectedDay) return ''; return this.selectedDay + ' ' + this.monthNames[this.month] + ' ' + this.year; },
+                handleImageUpload(e) {
+                    const file = e.target.files && e.target.files[0];
+                    if (file) {
+                        this.selectedImageName = file.name;
+                        this.selectedImagePreview = URL.createObjectURL(file);
+                        this.imageSelected = true;
+                    } else {
+                        this.clearImage();
+                    }
+                },
+                clearImage() {
+                    this.imageSelected = false;
+                    this.selectedImageName = null;
+                    this.selectedImagePreview = null;
+                    if (this.$refs.imageInput) this.$refs.imageInput.value = null;
+                }
             }
         }
     </script>

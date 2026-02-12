@@ -70,7 +70,7 @@
                                         <div class="mt-2 flex items-start gap-2 p-2 rounded-lg border" :class="darkMode ? 'bg-indigo-900/20 border-indigo-500/30' : 'bg-indigo-50 border-indigo-100'">
                                             <svg class="w-4 h-4 text-indigo-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>
                                             <div class="text-xs">
-                                                <span class="font-bold text-indigo-500 block mb-0.5">Feedback Mentor:</span>
+                                                <span class="font-bold text-indigo-500 block mb-0.5">Feedback Instruktur:</span>
                                                 <span class="italic" :class="darkMode ? 'text-indigo-200' : 'text-indigo-700'">"{{ $report->komentar_mentor }}"</span>
                                             </div>
                                         </div>
@@ -152,6 +152,10 @@
                                             
                                             <button name="status" value="rejected" class="w-full flex items-center justify-between px-4 py-3 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-xl transition-colors font-medium text-sm group">
                                                 <span>Tolak Laporan</span>
+                                            </button>
+
+                                            <button name="status" value="alpha" class="w-full flex items-center justify-between px-4 py-3 bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 rounded-xl transition-colors font-medium text-sm group">
+                                                <span>Tandai Alpha (Tidak Hadir)</span>
                                                 <svg class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                                             </button>
                                         </form>

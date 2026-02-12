@@ -11,7 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        
+        // MENDAFTARKAN ALIAS MIDDLEWARE DISINI
+        $middleware->alias([
+            'super_admin' => \App\Http\Middleware\IsSuperAdmin::class,
+            'mentor'      => \App\Http\Middleware\IsMentor::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

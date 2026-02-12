@@ -1,11 +1,11 @@
 @php
-    $layout = Auth::user()->role === 'mentor' ? 'admin-layout' : 'app-layout';
+    $layout = in_array(Auth::user()->role, ['mentor', 'super_admin']) ? 'admin-layout' : 'app-layout';
 @endphp
 
 <x-dynamic-component :component="$layout">
     <div class="py-12 bg-gray-50 min-h-screen">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            
+
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-900">Pengaturan Akun</h2>
                 <p class="text-gray-500 text-sm mt-1">Kelola informasi profil dan keamanan akun Anda.</p>
@@ -19,7 +19,7 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative">
                         <!-- Header Gradient -->
                         <div class="h-32 bg-gradient-to-r from-indigo-600 to-purple-600"></div>
-                        
+
                         <div class="px-6 pb-8 relative text-center">
                             <!-- Avatar (Inisial) -->
                             <div class="w-24 h-24 mx-auto -mt-12 rounded-full bg-white p-1.5 shadow-lg">
@@ -27,14 +27,14 @@
                                     {{ substr($user->name, 0, 1) }}
                                 </div>
                             </div>
-                            
+
                             <h3 class="mt-4 text-xl font-bold text-gray-900">{{ $user->name }}</h3>
                             <p class="text-sm text-gray-500">{{ $user->email }}</p>
 
                             <div class="mt-4 flex justify-center gap-2">
-                                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider 
-                                    {{ $user->role === 'mentor' ? 'bg-indigo-100 text-indigo-700' : 'bg-green-100 text-green-700' }}">
-                                    {{ $user->role === 'mentor' ? 'Mentor / Admin' : 'Peserta Magang' }}
+                                <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider
+                                    {{ $user->role === 'super_admin' ? 'bg-purple-100 text-purple-700' : ($user->role === 'mentor' ? 'bg-indigo-100 text-indigo-700' : 'bg-green-100 text-green-700') }}">
+                                    {{ $user->role === 'super_admin' ? 'Super Admin' : ($user->role === 'mentor' ? 'Instruktur' : 'Peserta Magang') }}
                                 </span>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
 
                 <!-- KOLOM KANAN: FORM UPDATE -->
                 <div class="lg:col-span-2 space-y-8">
-                    
+
                     <!-- 1. Update Profile Information -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
                         <div class="mb-6">
@@ -169,7 +169,7 @@
                                 <h3 class="text-lg font-bold text-red-800">Hapus Akun</h3>
                                 <p class="text-sm text-red-600 mt-1">Setelah akun dihapus, semua data akan hilang permanen.</p>
                             </div>
-                            
+
                             <!-- AlpineJS Modal Logic for Deletion -->
                             <div x-data="{ open: false }">
                                 <button @click="open = true" class="px-4 py-2 bg-red-600 text-white text-sm font-bold rounded-lg hover:bg-red-700 transition">
@@ -183,13 +183,13 @@
                                         <p class="mt-2 text-sm text-gray-600">
                                             Masukkan password Anda untuk mengonfirmasi bahwa Anda ingin menghapus akun Anda secara permanen.
                                         </p>
-                                        
+
                                         <form method="post" action="{{ route('profile.destroy') }}" class="mt-6">
                                             @csrf
                                             @method('delete')
-                                            
+
                                             <input type="password" name="password" placeholder="Password Anda" class="w-full rounded-lg border-gray-300 mb-4 focus:ring-red-500 focus:border-red-500">
-                                            
+
                                             <div class="flex justify-end gap-3">
                                                 <button type="button" @click="open = false" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">Batal</button>
                                                 <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Hapus Permanen</button>

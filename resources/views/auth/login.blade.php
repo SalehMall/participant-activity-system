@@ -141,7 +141,7 @@
                 <!-- Footer Form -->
                 <div class="mt-8 text-center">
                     <p class="text-sm text-gray-500">
-                        Belum punya akun? <span class="text-gray-800 font-medium">Hubungi Mentor.</span>
+                        Belum punya akun? <span class="text-gray-800 font-medium">Hubungi Instruktur.</span>
                     </p>
                 </div>
             </div>

@@ -80,6 +80,7 @@
                                 <button name="status" value="approved" class="flex-1 sm:flex-none px-5 py-2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-emerald-700 transition-all shadow-sm">Setujui</button>
                                 <button name="status" value="revision" class="flex-1 sm:flex-none px-5 py-2 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-amber-600 transition-all shadow-sm">Revisi</button>
                                 <button name="status" value="rejected" class="flex-1 sm:flex-none px-5 py-2 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-rose-700 transition-all shadow-sm">Tolak</button>
+                                <button name="status" value="alpha" class="flex-1 sm:flex-none px-5 py-2 bg-slate-700 text-white text-[10px] font-black uppercase tracking-widest rounded-lg hover:bg-slate-800 transition-all shadow-sm">Alpha</button>
                             </div>
                         </form>
                     </div>
